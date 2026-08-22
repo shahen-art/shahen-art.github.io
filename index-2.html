@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قلم ولحن شاهين | ملحن خوارزمي</title>
+<meta name="description" content="شاهين — كاتب، مؤلف، ملحن، موزع، ومنتج. قلم ولحن شاهين | ملحن خوارزمي">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0b0a08;
+    --bg-elevated:#15120d;
+    --bg-card:#1c1712;
+    --gold:#c89b3c;
+    --gold-bright:#e8c468;
+    --bronze:#6b4423;
+    --ivory:#ede6d6;
+    --ivory-dim:#a89e8c;
+    --line:#3a2e20;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-deep);
+    color:var(--ivory);
+    font-family:'Tajawal',sans-serif;
+    line-height:1.8;
+    overflow-x:hidden;
+    position:relative;
+  }
+  /* subtle ambient glow only — the note frame below carries the identity */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(200,155,60,0.05) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(200,155,60,0.04) 0%, transparent 40%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ===== Musical-note ornamental frame (top & bottom edges) ===== */
+  .note-frame{
+    position:fixed;
+    left:0; right:0;
+    height:26px;
+    z-index:998;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    background:linear-gradient(180deg, var(--bg-deep) 0%, rgba(11,10,8,0.85) 100%);
+    border-color:var(--line);
+    pointer-events:none;
+  }
+  .note-frame.top{top:0; border-bottom:1px solid var(--line);}
+  .note-frame.bottom{bottom:0; border-top:1px solid var(--line); background:linear-gradient(0deg, var(--bg-deep) 0%, rgba(11,10,8,0.85) 100%);}
+  .note-frame .note-track{
+    display:flex;
+    white-space:nowrap;
+    color:var(--gold);
+    font-size:1rem;
+    letter-spacing:22px;
+    opacity:0.55;
+    animation:noteScroll 40s linear infinite;
+  }
+  .note-frame.bottom .note-track{animation-direction:reverse;}
+  @keyframes noteScroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .note-frame .note-track{animation:none;}
+  }
+  body{padding-top:26px; padding-bottom:26px;}
+
+  /* ===== Elegant section-title ornament ===== */
+  .title-ornament{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:14px;
+    margin:10px 0 26px;
+  }
+  .title-ornament .line{
+    flex:1;
+    max-width:120px;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold) 100%);
+  }
+  .title-ornament .mark{
+    color:var(--gold-bright);
+    font-size:1.1rem;
+    line-height:1;
+  }
+
+  /* ===== Hamburger + Drawer menu ===== */
+  .menu-btn{
+    position:fixed;
+    top:14px;
+    left:14px;
+    z-index:1001;
+    width:46px;
+    height:46px;
+    border:1px solid var(--gold);
+    background:rgba(11,10,8,0.75);
+    backdrop-filter:blur(6px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    cursor:pointer;
+    border-radius:4px;
+  }
+  .menu-btn span{width:20px; height:2px; background:var(--gold-bright); display:block;}
+  .drawer-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,0.6);
+    z-index:1002; opacity:0; pointer-events:none; transition:opacity .3s;
+  }
+  .drawer-overlay.open{opacity:1; pointer-events:auto;}
+  .drawer{
+    position:fixed;
+    top:0; left:0;
+    height:100%;
+    width:280px;
+    max-width:80vw;
+    background:var(--bg-elevated);
+    border-right:1px solid var(--line);
+    z-index:1003;
+    transform:translateX(-100%);
+    transition:transform .35s ease;
+    padding:90px 28px 28px;
+    overflow-y:auto;
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-close{
+    position:absolute; top:16px; left:16px;
+    width:38px; height:38px;
+    border:1px solid var(--line);
+    background:transparent; color:var(--gold-bright);
+    font-size:1.2rem; cursor:pointer; border-radius:4px;
+  }
+  .drawer h4{
+    color:var(--gold);
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    margin:22px 0 10px;
+  }
+  .drawer h4:first-child{margin-top:0;}
+  .drawer ul{list-style:none;}
+  .drawer li a{
+    display:block;
+    padding:10px 0;
+    color:var(--ivory);
+    text-decoration:none;
+    font-size:1.05rem;
+    border-bottom:1px solid var(--line);
+    transition:color .25s, padding-right .25s;
+  }
+  .drawer li a:hover{color:var(--gold-bright); padding-right:8px;}
+  h1,h2,h3,.font-display{font-family:'Aref Ruqaa',serif;}
+  .latin{font-family:'Cormorant Garamond',serif; font-style:italic; letter-spacing:0.05em;}
+
+  /* ===== Fixed corner badge ===== */
+  .corner-badge{
+    position:fixed;
+    top:14px;
+    right:14px;
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    overflow:hidden;
+    z-index:1000;
+    opacity:0.88;
+    box-shadow:0 0 0 1px rgba(200,155,60,0.4), 0 4px 14px rgba(0,0,0,0.5);
+    transition:opacity .3s ease, transform .3s ease;
+  }
+  .corner-badge:hover{opacity:1; transform:scale(1.06);}
+  .corner-badge img{width:100%;height:100%;object-fit:cover;}
+
+  /* ===== Header nav ===== */
+  header{
+    position:sticky;
+    top:0;
+    z-index:900;
+    background:rgba(11,10,8,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 80px 14px 24px;
+  }
+  .brand-mini{
+    font-family:'Aref Ruqaa',serif;
+    font-size:1.3rem;
+    color:var(--gold-bright);
+  }
+  .nav-links{display:flex; gap:28px; list-style:none;}
+  .nav-links a{
+    color:var(--ivory-dim);
+    text-decoration:none;
+    font-size:0.95rem;
+    transition:color .25s;
+    position:relative;
+  }
+  .nav-links a:hover{color:var(--gold-bright);}
+  @media (max-width:768px){
+    .nav-links{display:none;}
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      linear-gradient(180deg, rgba(11,10,8,0.55) 0%, rgba(11,10,8,0.85) 100%),
+      url('InShot_20260811_213230979.jpg') center 30%/cover no-repeat;
+    text-align:center;
+    padding:40px 20px;
+    z-index:1;
+  }
+  .hero-inner{max-width:780px;}
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.2rem);
+    color:var(--gold-bright);
+    text-shadow:0 2px 24px rgba(0,0,0,0.7);
+    margin-bottom:10px;
+  }
+  .hero .tagline{
+    font-size:clamp(1rem, 2.2vw, 1.3rem);
+    color:var(--ivory);
+    letter-spacing:0.15em;
+    margin-bottom:6px;
+  }
+  .hero .roles{
+    color:var(--ivory-dim);
+    font-size:0.95rem;
+    letter-spacing:0.08em;
+    margin-bottom:34px;
+  }
+  .hero .roles span{margin:0 6px;}
+  .hero .poetic-line{
+    font-family:'Aref Ruqaa',serif;
+    color:var(--gold-bright);
+    font-size:clamp(1rem, 2.6vw, 1.4rem);
+    margin:18px auto 30px;
+    min-height:1.6em;
+    border-left:2px solid var(--gold);
+    padding-left:12px;
+    display:inline-block;
+  }
+  .cta-row{display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
+  .btn{
+    display:inline-block;
+    padding:13px 34px;
+    border-radius:2px;
+    font-size:0.95rem;
+    text-decoration:none;
+    letter-spacing:0.03em;
+    transition:all .3s ease;
+    border:1px solid var(--gold);
+  }
+  .btn-primary{background:var(--gold); color:#0b0a08; font-weight:700;}
+  .btn-primary:hover{background:var(--gold-bright); box-shadow:0 0 24px rgba(200,155,60,0.4);}
+  .btn-outline{color:var(--gold-bright); background:transparent;}
+  .btn-outline:hover{background:rgba(200,155,60,0.1);}
+
+  /* breathing divider — signature element */
+  .mawwal-line{
+    width:0;
+    height:1px;
+    background:var(--gold);
+    margin:60px auto;
+    animation:breathe 4s ease-in-out infinite;
+    box-shadow:0 0 8px rgba(200,155,60,0.6);
+  }
+  @keyframes breathe{
+    0%,100%{width:60px; opacity:0.5;}
+    50%{width:160px; opacity:1;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .mawwal-line{animation:none; width:120px;}
+  }
+
+  section{
+    position:relative;
+    z-index:1;
+    max-width:1100px;
+    margin:0 auto;
+    padding:90px 24px;
+  }
+  .section-eyebrow{
+    color:var(--gold);
+    letter-spacing:0.25em;
+    font-size:0.8rem;
+    text-transform:uppercase;
+  }
+  .section-title{
+    font-size:clamp(2rem, 4.4vw, 2.9rem);
+    color:var(--ivory);
+    margin:8px 0 4px;
+    text-shadow:0 0 30px rgba(200,155,60,0.15);
+    letter-spacing:0.01em;
+  }
+  .section-lead{
+    color:var(--ivory-dim);
+    max-width:680px;
+    font-size:1.05rem;
+  }
+
+  /* ===== About ===== */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:50px;
+    align-items:start;
+    margin-top:40px;
+  }
+  .about-badge-wrap{
+    display:flex;
+    justify-content:center;
+  }
+  .about-badge-wrap img{
+    width:100%;
+    max-width:320px;
+    border-radius:50%;
+  }
+  @media (max-width:768px){
+    .about-grid{grid-template-columns:1fr; gap:32px;}
+    .about-badge-wrap{order:-1;}
+    .about-badge-wrap img{max-width:220px;}
+  }
+  .about-text p{margin-bottom:16px; color:var(--ivory-dim);}
+  .about-text strong{color:var(--gold-bright); font-weight:500;}
+
+  /* ===== Styles / Songs grid ===== */
+  .styles-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:22px;
+    margin-top:40px;
+  }
+  .style-card{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    padding:28px 24px;
+    transition:border-color .3s, transform .3s;
+    position:relative;
+  }
+  .style-card:hover{border-color:var(--gold); transform:translateY(-4px);}
+  .style-card .style-name{
+    font-family:'Aref Ruqaa',serif;
+    color:var(--gold-bright);
+    font-size:1.3rem;
+    margin-bottom:8px;
+  }
+  .style-card .style-latin{
+    display:block;
+    color:var(--gold);
+    font-size:0.85rem;
+    margin-bottom:14px;
+  }
+  .style-card p{color:var(--ivory-dim); font-size:0.92rem;}
+
+  /* ===== Poetry (Dawawin) ===== */
+  .diwan-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    gap:16px;
+    margin-top:40px;
+  }
+  .diwan-item{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:20px;
+    border-bottom:1px solid var(--line);
+    transition:background .3s;
+  }
+  .diwan-item:hover{background:rgba(200,155,60,0.05);}
+  .diwan-num{
+    font-family:'Cormorant Garamond',serif;
+    font-style:normal;
+    font-size:1.6rem;
+    color:var(--bronze);
+    min-width:36px;
+  }
+  .diwan-item h3{font-size:1.15rem; color:var(--ivory); margin-bottom:4px;}
+  .diwan-item span{color:var(--ivory-dim); font-size:0.88rem;}
+
+  /* ===== Archive ===== */
+  .archive-note{
+    text-align:center;
+    padding:60px 24px;
+    color:var(--ivory-dim);
+    border:1px dashed var(--line);
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    background:var(--bg-elevated);
+    border-top:1px solid var(--line);
+    padding:70px 24px 40px;
+    position:relative;
+    z-index:1;
+  }
+  .footer-inner{
+    max-width:1000px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .footer-badge{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    margin:0 auto 24px;
+    box-shadow:0 0 0 2px var(--gold), 0 0 30px rgba(200,155,60,0.25);
+  }
+  .footer-badge img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+  .platform-links{
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    flex-wrap:wrap;
+    margin:28px 0;
+  }
+  .platform-links a{
+    color:var(--ivory-dim);
+    text-decoration:none;
+    font-size:0.95rem;
+    padding:8px 18px;
+    border:1px solid var(--line);
+    transition:all .3s;
+  }
+  .platform-links a:hover{color:var(--gold-bright); border-color:var(--gold);}
+  .copyright{
+    color:var(--ivory-dim);
+    font-size:0.82rem;
+    line-height:2;
+    margin-top:30px;
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .copyright .gold{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<div class="note-frame top"><div class="note-track">♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 </div></div>
+<div class="note-frame bottom"><div class="note-track">♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 </div></div>
+
+<a href="#top" class="corner-badge" aria-label="شاهين - الرئيسية">
+  <img src="watermark_circular.png" alt="شعار قلم ولحن شاهين">
+</a>
+
+<button class="menu-btn" onclick="document.getElementById('drawer').classList.add('open');document.getElementById('drawerOverlay').classList.add('open')" aria-label="فتح القائمة">
+  <span></span><span></span><span></span>
+</button>
+
+<div class="drawer-overlay" id="drawerOverlay" onclick="document.getElementById('drawer').classList.remove('open');this.classList.remove('open')"></div>
+<aside class="drawer" id="drawer">
+  <button class="drawer-close" onclick="document.getElementById('drawer').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open')">✕</button>
+
+  <h4>الموقع</h4>
+  <ul>
+    <li><a href="#top">الرئيسية</a></li>
+    <li><a href="#about">من أنا</a></li>
+    <li><a href="#songs">الأغاني</a></li>
+    <li><a href="#poetry">الدواوين الشعرية</a></li>
+    <li><a href="#archive">الأرشيف</a></li>
+  </ul>
+
+  <h4>منصاتي</h4>
+  <ul>
+    <li><a href="https://linktr.ee/shahen.art.2026" target="_blank" rel="noopener">🔗 كل الروابط</a></li>
+    <li><a href="#" target="_blank" rel="noopener">YouTube</a></li>
+    <li><a href="#" target="_blank" rel="noopener">TikTok</a></li>
+    <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="#" target="_blank" rel="noopener">Spotify</a></li>
+  </ul>
+
+  <h4>تواصل</h4>
+  <ul>
+    <li><a href="#contact">معلومات التواصل</a></li>
+  </ul>
+</aside>
+
+<header>
+  <nav>
+    <div class="brand-mini">شاهين <span class="latin" style="font-size:0.8rem; color:var(--gold);">SHAHEN</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">من أنا</a></li>
+      <li><a href="#songs">الأغاني</a></li>
+      <li><a href="#poetry">الدواوين</a></li>
+      <li><a href="#archive">الأرشيف</a></li>
+      <li><a href="#contact">تواصل</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div id="top" class="hero">
+  <div class="hero-inner">
+    <h1>قلم ولحن شاهين</h1>
+    <div class="tagline latin">SHAHEN — The Algorithmic Composer</div>
+    <div class="roles">
+      <span>كاتب</span>•<span>مؤلف</span>•<span>ملحن</span>•<span>موزع</span>•<span>منتج</span>
+    </div>
+    <div class="poetic-line" id="poeticLine"></div>
+    <div class="cta-row">
+      <a href="#songs" class="btn btn-primary">استمع الآن</a>
+      <a href="#poetry" class="btn btn-outline">تصفّح الدواوين</a>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-eyebrow">Biography</div>
+  <h2 class="section-title">من أنا</h2>
+  <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>أنا <strong>شاهين</strong>، فنان سوري، أكتب وأؤلف وألحّن وأوزّع وأنتج أعمالي بنفسي من الفكرة الأولى حتى الإصدار النهائي. أعمل بروح الحرفي الذي لا يقبل بالخطأ، ولا يترك تفصيلًا للصدفة.</p>
+      <p>خلفيتي الشعرية تمتد عبر تقاليد عائلية في نظم الكلام، وارتباط عميق بالتراث الطربي العربي (أم كلثوم، جورج وسوف، ميادة الحناوي). من هذا الأساس الكلاسيكي، أبني إنتاجًا معاصرًا متعدد اللهجات (شامي، مصري، خليجي، مغربي، عراقي، فصحى) ومتعدد اللغات (عربي، إنجليزي، فرنسي، إسباني).</p>
+      <p>أستخدم أدوات الذكاء الاصطناعي كأدواتٍ للتنفيذ فقط — أما الرؤية الفنية والتوجيه الكامل فهو نتاج مباشر لتفكيري وذوقي كمخرج إبداعي لكل عمل.</p>
+    </div>
+    <div class="about-badge-wrap">
+      <img src="watermark_circular.png" alt="شاهين">
+    </div>
+  </div>
+</section>
+
+<section id="songs">
+  <div class="section-eyebrow">Musical Identities</div>
+  <h2 class="section-title">الأغاني — الهويات اللحنية</h2>
+  <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
+
+  <p class="section-lead">ست هويات لحنية أسستها كبصمة صوتية مميزة لأعمالي.</p>
+  <div class="styles-grid">
+
+    <div class="style-card">
+      <div class="style-name">SHAHEN Wave</div>
+      <span class="style-latin latin">The Original Signature</span>
+      <p>الهوية الأصلية — طربي شرقي أصيل بروح معاصرة.</p>
+    </div>
+
+    <div class="style-card">
+      <div class="style-name">SHAHEN Atlas Wave</div>
+      <span class="style-latin latin">Moroccan Spirit</span>
+      <p>امتداد مغربي نابض بالحيوية والإيقاع.</p>
+    </div>
+
+    <div class="style-card">
+      <div class="style-name">SHAHEN Ember Wave</div>
+      <span class="style-latin latin">Levantine Intimate</span>
+      <p>دفء شامي حميمي، للحن والحزن العميق.</p>
+    </div>
+
+    <div class="style-card">
+      <div class="style-name">SHAHEN Furat Wave</div>
+      <span class="style-latin latin">Iraqi Shaabi Chant</span>
+      <p>الصوت هو البطل — شجن عراقي أصيل بلا منافس.</p>
+    </div>
+
+    <div class="style-card">
+      <div class="style-name">SHAHEN Lazma Wave</div>
+      <span class="style-latin latin">Damascene Hook Pop</span>
+      <p>بوب شامي عصري، لازمة تلتصق بالذهن من أول استماع.</p>
+    </div>
+
+    <div class="style-card">
+      <div class="style-name">SHAHEN Fusion Wave</div>
+      <span class="style-latin latin">General Fusion</span>
+      <p>القاعدة العامة لاندماج الشرق والعالمية، تتطوّع حسب كل عمل.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="poetry">
+  <div class="section-eyebrow">Poetry Collections</div>
+  <h2 class="section-title">الدواوين الشعرية</h2>
+  <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
+
+  <p class="section-lead">ست مجموعات شعرية تحمل تجربة الكلمة قبل اللحن.</p>
+  <div class="diwan-list">
+    <div class="diwan-item"><span class="diwan-num">01</span><div><h3>ديوان الشوق والحنين</h3><span>Longing &amp; Yearning</span></div></div>
+    <div class="diwan-item"><span class="diwan-num">02</span><div><h3>ديوان الفراق والخيانة</h3><span>Heartbreak &amp; Betrayal</span></div></div>
+    <div class="diwan-item"><span class="diwan-num">03</span><div><h3>ديوان الرجولة والكرامة</h3><span>Masculinity &amp; Dignity</span></div></div>
+    <div class="diwan-item"><span class="diwan-num">04</span><div><h3>ديوان الوطن والهوية</h3><span>Homeland &amp; Identity</span></div></div>
+    <div class="diwan-item"><span class="diwan-num">05</span><div><h3>ديوان الأهل والذاكرة</h3><span>Family &amp; Memory</span></div></div>
+    <div class="diwan-item"><span class="diwan-num">06</span><div><h3>ديوان الحكمة وألم الإنسان</h3><span>Wisdom &amp; Human Pain</span></div></div>
+  </div>
+</section>
+
+<section id="archive">
+  <div class="section-eyebrow">Chronicle</div>
+  <h2 class="section-title">الأرشيف</h2>
+  <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
+
+  <div class="archive-note">
+    <p>سيتم إضافة الأعمال بالتسلسل الزمني هنا — كل أغنية، تاريخ إصدارها، ولهجتها.</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-badge">
+      <img src="watermark_circular.png" alt="شاهين">
+    </div>
+    <h2 class="section-title" style="font-size:1.6rem;">تابعوني على كل منصاتي</h2>
+    <div class="platform-links">
+      <a href="https://linktr.ee/shahen.art.2026" target="_blank" rel="noopener">🔗 كل الروابط</a>
+      <a href="#" target="_blank" rel="noopener">YouTube</a>
+      <a href="#" target="_blank" rel="noopener">TikTok</a>
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">Spotify</a>
+    </div>
+    <div class="copyright">
+      <span class="gold">قلم ولحن شاهين ✍️ | ملحن خوارزمي</span> / جميع الحقوق محفوظة / © Shahen | All Rights Reserved<br>
+      Member APRA AMCOS (IPI Registered)
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Typewriter effect for a chosen poetic line — establishes "poet first" identity
+  const poeticLines = [
+    "أنا لستُ صوتًا عابرًا، أنا قلمٌ يغنّي",
+  ];
+  const el = document.getElementById('poeticLine');
+  let line = poeticLines[0];
+  let i = 0;
+  function typeLine(){
+    if(i <= line.length){
+      el.textContent = line.slice(0, i);
+      i++;
+      setTimeout(typeLine, 70);
+    }
+  }
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    typeLine();
+  } else {
+    el.textContent = line;
+  }
+</script>
+</body>
+</html>
