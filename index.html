@@ -240,7 +240,7 @@
   }
   .style-card:hover .play-hint { transform: translateX(-4px); color: #fff; }
 
-  /* Dawaween Poetry Collections Grid */
+  /* Dawaween Interactive Grid (7 Collections) */
   .diwan-list{
     display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-top:30px;
   }
@@ -251,6 +251,7 @@
     border-radius: 4px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 16px;
     text-decoration: none;
     transition: border-color .3s, transform .3s;
@@ -347,7 +348,6 @@
     margin-top: 2px;
   }
 
-  /* خفّفنا سمك الخط وجعلناه واضحاً وسهل القراءة هنا */
   .poem-text-body {
     text-align: center;
     color: var(--ivory);
@@ -427,7 +427,7 @@
     <li><a href="#top" onclick="closeDrawer()">الرئيسية</a></li>
     <li><a href="#about" onclick="closeDrawer()">من أنا</a></li>
     <li><a href="#songs" onclick="closeDrawer()">الأغاني</a></li>
-    <li><a href="#poetry" onclick="closeDrawer()">الدواوين الشعرية</a></li>
+    <li><a href="dawaweenShahen.html" onclick="closeDrawer()" style="color:var(--gold-bright); font-weight:bold;">📖 صفحة الدواوين الشعرية</a></li>
     <li><a href="#showcase" onclick="closeDrawer()">منتخبات شعرية</a></li>
   </ul>
 
@@ -454,7 +454,7 @@
     <ul class="nav-links">
       <li><a href="#about">من أنا</a></li>
       <li><a href="#songs">الأغاني</a></li>
-      <li><a href="#poetry">الدواوين الشعرية</a></li>
+      <li><a href="dawaweenShahen.html" style="color:var(--gold-bright);">الدواوين الشعرية</a></li>
       <li><a href="#showcase">منتخبات شعرية</a></li>
       <li><a href="#contact">تواصل</a></li>
     </ul>
@@ -481,7 +481,7 @@
 
     <div class="cta-row">
       <a href="#songs" class="btn btn-primary">استمع للألحان</a>
-      <a href="#showcase" class="btn btn-outline">تصفّح القوافي</a>
+      <a href="dawaweenShahen.html" class="btn btn-outline">تصفّح الدواوين</a>
     </div>
   </div>
 </div>
@@ -561,21 +561,77 @@
   </div>
 </section>
 
-<!-- إعادة قسم الدواوين الشعرية كاملاً -->
+<!-- قسم الدواوين السبعة المنشطة بالروابط التفاعلية -->
 <section id="poetry">
   <div class="section-eyebrow">Poetry Collections</div>
   <h2 class="section-title">الدواوين الشعرية</h2>
   <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
 
-  <p class="section-lead">الدواوين الشعرية الموثقة والمحفوظة ببصمة SHAHEN:</p>
+  <p class="section-lead">اضغط على أي ديوان للذهاب المباشر إلى صفحة النصوص والأبيات الكاملة:</p>
   
   <div class="diwan-list">
-    <div class="diwan-item"><span class="diwan-num">01</span><div><h3>ديوان الشوق والحنين</h3><span>Longing &amp; Yearning</span></div></div>
-    <div class="diwan-item"><span class="diwan-num">02</span><div><h3>ديوان الفراق والخيانة</h3><span>Heartbreak &amp; Betrayal</span></div></div>
-    <div class="diwan-item"><span class="diwan-num">03</span><div><h3>ديوان الرجولة والكرامة</h3><span>Masculinity &amp; Dignity</span></div></div>
-    <div class="diwan-item"><span class="diwan-num">04</span><div><h3>ديوان الوطن والهوية</h3><span>Homeland &amp; Identity</span></div></div>
-    <div class="diwan-item"><span class="diwan-num">05</span><div><h3>ديوان الأهل والذاكرة</h3><span>Family &amp; Memory</span></div></div>
-    <div class="diwan-item"><span class="diwan-num">06</span><div><h3>ديوان الحكمة وألم الإنسان</h3><span>Wisdom &amp; Human Pain</span></div></div>
+    <!-- 01 -->
+    <a href="dawaweenShahen.html" class="diwan-item">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <span class="diwan-num">01</span>
+        <div><h3>ديوان الشوق والحنين</h3><span>Longing &amp; Yearning</span></div>
+      </div>
+      <span style="color:var(--gold-bright); font-size:0.85rem;">📖 فتح الأبيات ➔</span>
+    </a>
+
+    <!-- 02 -->
+    <a href="dawaweenShahen.html" class="diwan-item">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <span class="diwan-num">02</span>
+        <div><h3>ديوان الفراق والخيانة</h3><span>Heartbreak &amp; Betrayal</span></div>
+      </div>
+      <span style="color:var(--gold-bright); font-size:0.85rem;">📖 فتح الأبيات ➔</span>
+    </a>
+
+    <!-- 03 -->
+    <a href="dawaweenShahen.html" class="diwan-item">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <span class="diwan-num">03</span>
+        <div><h3>ديوان الرجولة والكرامة</h3><span>Masculinity &amp; Dignity</span></div>
+      </div>
+      <span style="color:var(--gold-bright); font-size:0.85rem;">📖 فتح الأبيات ➔</span>
+    </a>
+
+    <!-- 04 -->
+    <a href="dawaweenShahen.html" class="diwan-item">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <span class="diwan-num">04</span>
+        <div><h3>ديوان الوطن والهوية</h3><span>Homeland &amp; Identity</span></div>
+      </div>
+      <span style="color:var(--gold-bright); font-size:0.85rem;">📖 فتح الأبيات ➔</span>
+    </a>
+
+    <!-- 05 -->
+    <a href="dawaweenShahen.html" class="diwan-item">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <span class="diwan-num">05</span>
+        <div><h3>ديوان الأهل والناكرة</h3><span>Family &amp; Memory</span></div>
+      </div>
+      <span style="color:var(--gold-bright); font-size:0.85rem;">📖 فتح الأبيات ➔</span>
+    </a>
+
+    <!-- 06 -->
+    <a href="dawaweenShahen.html" class="diwan-item">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <span class="diwan-num">06</span>
+        <div><h3>ديوان الحكمة وألم الإنسان</h3><span>Wisdom &amp; Human Pain</span></div>
+      </div>
+      <span style="color:var(--gold-bright); font-size:0.85rem;">📖 فتح الأبيات ➔</span>
+    </a>
+
+    <!-- 07 -->
+    <a href="dawaweenShahen.html" class="diwan-item">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <span class="diwan-num">07</span>
+        <div><h3>ديوان الحب والغزل</h3><span>Love &amp; Romance</span></div>
+      </div>
+      <span style="color:var(--gold-bright); font-size:0.85rem;">📖 فتح الأبيات ➔</span>
+    </a>
   </div>
 </section>
 
@@ -584,7 +640,6 @@
   <h2 class="section-title">مُنْتَخَبَاتٌ شِعْرِيَّة — مِنْ الكَلِمَةِ إِلَى النَّغَم</h2>
   <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
 
-  <!-- الديباجة الوقارية الفخمة للقسم -->
   <div class="poetic-intro-box">
     <div class="intro-title">«تَجَلِّيَاتُ القَلَمِ وَالـنَّغَم»</div>
     <div class="intro-body">
@@ -592,7 +647,6 @@
     </div>
   </div>
 
-  <!-- بطاقة العمل الأول: قصيدة أعلنتُ حبكِ -->
   <div class="masterpiece-card">
     <div class="work-header">
       <span class="work-tag">قصيدة وموسيقى</span>
@@ -601,7 +655,6 @@
       <span class="work-subtitle latin">A'lantu Hubbaki — Written, Recited &amp; Composed by SHAHEN</span>
     </div>
 
-    <!-- نص القصيدة كاملاً بخط صافٍ ومريح جداً للقراءة -->
     <div class="poem-text-body">
       أَعْلَنْتُ حُبَّكِ.. لِلْوُجُودِ مَهَابَةً ... فَبِكِ الشُّمُوخُ.. يَطِيبُ لِي.. ويُخَلَّدُ<br>
       يا رُوحاً نَزلتْ على قَلبي لِتُحيِيَهُ ... فَصِرتِ أنتِ الهَوى.. والعِزُّ.. والمَدَدُ<br>
@@ -614,7 +667,6 @@
       أنا في غَرامِكِ.. هَيبةٌ.. وهَوىً.. وَوَعدُ
     </div>
 
-    <!-- روابط الإلقاء والأغنية على يوتيوب -->
     <div class="media-actions-row">
       <a href="https://youtu.be/JuW5vhf3jqc?si=CSNETmgzWtiETjcP" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
         🎙️ الإلقاء الصوتي (بصوت SHAHEN)
