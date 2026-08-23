@@ -173,9 +173,10 @@
   }
   .statement-body {
     color: var(--ivory);
-    font-family: 'Aref Ruqaa', serif;
-    font-size: 1.25rem;
-    line-height: 2.1;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 2.2;
   }
 
   .cta-row{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:28px;}
@@ -239,6 +240,32 @@
   }
   .style-card:hover .play-hint { transform: translateX(-4px); color: #fff; }
 
+  /* Dawaween Poetry Collections Grid */
+  .diwan-list{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-top:30px;
+  }
+  .diwan-item{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    padding: 22px 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    transition: border-color .3s, transform .3s;
+  }
+  .diwan-item:hover{
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    background: rgba(200,155,60,0.06);
+  }
+  .diwan-num{
+    font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--gold); font-weight:700; min-width:32px;
+  }
+  .diwan-item h3{font-family:'Aref Ruqaa',serif; font-size:1.25rem; color:var(--gold-bright); margin-bottom:2px;}
+  .diwan-item span{color:var(--ivory-dim); font-size:0.85rem;}
+
   /* Showcase Section Styling */
   .poetic-intro-box {
     background: rgba(21, 18, 13, 0.95);
@@ -257,9 +284,10 @@
   }
   .intro-body {
     color: var(--ivory);
-    font-family: 'Aref Ruqaa', serif;
-    font-size: 1.2rem;
-    line-height: 2.1;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 2.2;
   }
 
   .masterpiece-card {
@@ -308,9 +336,9 @@
   }
   .work-meta {
     color: var(--gold);
-    font-family: 'Aref Ruqaa', serif;
-    font-size: 1rem;
-    margin-top: 4px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.95rem;
+    margin-top: 6px;
   }
   .work-subtitle {
     color: var(--ivory-dim);
@@ -319,13 +347,16 @@
     margin-top: 2px;
   }
 
+  /* خفّفنا سمك الخط وجعلناه واضحاً وسهل القراءة هنا */
   .poem-text-body {
     text-align: center;
     color: var(--ivory);
-    font-family: 'Aref Ruqaa', serif;
-    font-size: 1.3rem;
-    line-height: 2.5;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 2.6;
     margin: 24px 0 32px;
+    letter-spacing: 0.02em;
     user-select: none;
   }
 
@@ -396,6 +427,7 @@
     <li><a href="#top" onclick="closeDrawer()">الرئيسية</a></li>
     <li><a href="#about" onclick="closeDrawer()">من أنا</a></li>
     <li><a href="#songs" onclick="closeDrawer()">الأغاني</a></li>
+    <li><a href="#poetry" onclick="closeDrawer()">الدواوين الشعرية</a></li>
     <li><a href="#showcase" onclick="closeDrawer()">منتخبات شعرية</a></li>
   </ul>
 
@@ -422,6 +454,7 @@
     <ul class="nav-links">
       <li><a href="#about">من أنا</a></li>
       <li><a href="#songs">الأغاني</a></li>
+      <li><a href="#poetry">الدواوين الشعرية</a></li>
       <li><a href="#showcase">منتخبات شعرية</a></li>
       <li><a href="#contact">تواصل</a></li>
     </ul>
@@ -460,7 +493,8 @@
   <div class="about-grid">
     <div class="about-text">
       <p>أنا <strong>شَاهِين</strong>، كاتب، مؤلف، ملحن، وموزع موسيقي سوري ينحدر من الجولان السوري المحتل، وأعيش تجربة المغترب كحال الكثير من أبناء وطني. أعمل بشغف المخرج الإبداعي الحريص على بناء العمل من الحرف والنغمة الأولى حتى الإصدار النهائي دون ترك تفصيل للصدفة.</p>
-      <p>خلفيتي الشعرية تستند إلى تقاليد عائلية عريقة في نظم الكلام والارتباط الشديد بأصالة الطرب العربي. أنا عضو رسمي في منظمة حقوق الموسيقى العالمية <strong>APRA AMCOS</strong> (مسجل برقم IPI)، وأشارك كعضو استشاري ضمن لجان تقييم واختيار الأصوات والأعمال الموسيقية لتحديد النتاج الأفضل.</p>      <p>أسست لقبي الفني <strong>"المُلحّن الخوارزمي"</strong> لرسم بصمة موسيقية تجمع بين وقار التراث العربي المعاصر وتقنيات العصر الحديث، لتطويع الكلمة واللحن عبر لهجات ولغات متعددة بحرفية تلامس الروح.</p>
+      <p>خلفيتي الشعرية تستند إلى تقاليد عائلية عريقة في نظم الكلام والارتباط الشديد بأصالة الطرب العربي. أنا عضو رسمي في منظمة حقوق الموسيقى العالمية <strong>APRA AMCOS</strong> (مسجل برقم IPI)، وأشارك كعضو استشاري ضمن لجان تقييم واختيار الأصوات والأعمال الموسيقية لتحديد النتاج الأفضل.</p>
+      <p>أسست لقبي الفني <strong>"المُلحّن الخوارزمي"</strong> لرسم بصمة موسيقية تجمع بين وقار التراث العربي المعاصر وتقنيات العصر الحديث، لتطويع الكلمة واللحن عبر لهجات ولغات متعددة بحرفية تلامس الروح.</p>
     </div>
     <div class="about-badge-wrap">
       <img src="watermark_circular.png" alt="شاهين">
@@ -527,6 +561,24 @@
   </div>
 </section>
 
+<!-- إعادة قسم الدواوين الشعرية كاملاً -->
+<section id="poetry">
+  <div class="section-eyebrow">Poetry Collections</div>
+  <h2 class="section-title">الدواوين الشعرية</h2>
+  <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
+
+  <p class="section-lead">الدواوين الشعرية الموثقة والمحفوظة ببصمة SHAHEN:</p>
+  
+  <div class="diwan-list">
+    <div class="diwan-item"><span class="diwan-num">01</span><div><h3>ديوان الشوق والحنين</h3><span>Longing &amp; Yearning</span></div></div>
+    <div class="diwan-item"><span class="diwan-num">02</span><div><h3>ديوان الفراق والخيانة</h3><span>Heartbreak &amp; Betrayal</span></div></div>
+    <div class="diwan-item"><span class="diwan-num">03</span><div><h3>ديوان الرجولة والكرامة</h3><span>Masculinity &amp; Dignity</span></div></div>
+    <div class="diwan-item"><span class="diwan-num">04</span><div><h3>ديوان الوطن والهوية</h3><span>Homeland &amp; Identity</span></div></div>
+    <div class="diwan-item"><span class="diwan-num">05</span><div><h3>ديوان الأهل والذاكرة</h3><span>Family &amp; Memory</span></div></div>
+    <div class="diwan-item"><span class="diwan-num">06</span><div><h3>ديوان الحكمة وألم الإنسان</h3><span>Wisdom &amp; Human Pain</span></div></div>
+  </div>
+</section>
+
 <section id="showcase">
   <div class="section-eyebrow">Poetic &amp; Musical Masterpieces</div>
   <h2 class="section-title">مُنْتَخَبَاتٌ شِعْرِيَّة — مِنْ الكَلِمَةِ إِلَى النَّغَم</h2>
@@ -549,7 +601,7 @@
       <span class="work-subtitle latin">A'lantu Hubbaki — Written, Recited &amp; Composed by SHAHEN</span>
     </div>
 
-    <!-- نص القصيدة كاملاً بالتشكيل والعلامة المائية -->
+    <!-- نص القصيدة كاملاً بخط صافٍ ومريح جداً للقراءة -->
     <div class="poem-text-body">
       أَعْلَنْتُ حُبَّكِ.. لِلْوُجُودِ مَهَابَةً ... فَبِكِ الشُّمُوخُ.. يَطِيبُ لِي.. ويُخَلَّدُ<br>
       يا رُوحاً نَزلتْ على قَلبي لِتُحيِيَهُ ... فَصِرتِ أنتِ الهَوى.. والعِزُّ.. والمَدَدُ<br>
