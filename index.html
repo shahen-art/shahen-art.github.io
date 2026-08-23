@@ -30,7 +30,6 @@
     overflow-x:hidden;
     position:relative;
   }
-  /* subtle ambient glow only — the note frame below carries the identity */
   body::before{
     content:"";
     position:fixed;
@@ -42,7 +41,7 @@
     z-index:0;
   }
 
-  /* ===== Musical-note ornamental frame (top & bottom edges) ===== */
+  /* ===== Musical-note ornamental frame ===== */
   .note-frame{
     position:fixed;
     left:0; right:0;
@@ -76,7 +75,7 @@
   }
   body{padding-top:26px; padding-bottom:26px;}
 
-  /* ===== Elegant section-title ornament ===== */
+  /* ===== Title ornament ===== */
   .title-ornament{
     display:flex;
     align-items:center;
@@ -226,7 +225,7 @@
     justify-content:center;
     background:
       linear-gradient(180deg, rgba(11,10,8,0.55) 0%, rgba(11,10,8,0.85) 100%),
-      url('InShot_20260811_213230979.jpg') center 30%/cover no-repeat;
+      url('banner_5120x2880.png') center 30%/cover no-repeat;
     text-align:center;
     padding:40px 20px;
     z-index:1;
@@ -277,7 +276,6 @@
   .btn-outline{color:var(--gold-bright); background:transparent;}
   .btn-outline:hover{background:rgba(200,155,60,0.1);}
 
-  /* breathing divider — signature element */
   .mawwal-line{
     width:0;
     height:1px;
@@ -374,7 +372,7 @@
   }
   .style-card p{color:var(--ivory-dim); font-size:0.92rem;}
 
-  /* ===== Poetry (Dawawin) ===== */
+  /* ===== Poetry ===== */
   .diwan-list{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
@@ -433,7 +431,7 @@
   .platform-links{
     display:flex;
     justify-content:center;
-    gap:22px;
+    gap:16px;
     flex-wrap:wrap;
     margin:28px 0;
   }
@@ -484,13 +482,15 @@
     <li><a href="#archive">الأرشيف</a></li>
   </ul>
 
-  <h4>منصاتي</h4>
+  <h4>منصاتي الرسمية</h4>
   <ul>
-    <li><a href="https://linktr.ee/shahen.art.2026" target="_blank" rel="noopener">🔗 كل الروابط</a></li>
-    <li><a href="#" target="_blank" rel="noopener">YouTube</a></li>
-    <li><a href="#" target="_blank" rel="noopener">TikTok</a></li>
-    <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="#" target="_blank" rel="noopener">Spotify</a></li>
+    <li><a href="https://linktr.ee/shahen.art.2026" target="_blank" rel="noopener">🔗 كل الروابط (Linktree)</a></li>
+    <li><a href="https://www.youtube.com/@Shahen-b5m" target="_blank" rel="noopener">YouTube</a></li>
+    <li><a href="https://open.spotify.com/artist/4vZjdoka8pkUI13CEJbi6p" target="_blank" rel="noopener">Spotify</a></li>
+    <li><a href="https://www.instagram.com/shahen.ar" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="https://www.tiktok.com/@shahen_artist" target="_blank" rel="noopener">TikTok</a></li>
+    <li><a href="https://www.facebook.com/share/18HjzgShRo/" target="_blank" rel="noopener">Facebook</a></li>
+    <li><a href="https://www.threads.net/@shahen.ar" target="_blank" rel="noopener">Threads</a></li>
   </ul>
 
   <h4>تواصل</h4>
@@ -626,14 +626,18 @@
     <div class="footer-badge">
       <img src="watermark_circular.png" alt="شاهين">
     </div>
-    <h2 class="section-title" style="font-size:1.6rem;">تابعوني على كل منصاتي</h2>
+    <h2 class="section-title" style="font-size:1.6rem;">تابعوني على كل منصاتي الرسمية</h2>
+    
     <div class="platform-links">
       <a href="https://linktr.ee/shahen.art.2026" target="_blank" rel="noopener">🔗 كل الروابط</a>
-      <a href="#" target="_blank" rel="noopener">YouTube</a>
-      <a href="#" target="_blank" rel="noopener">TikTok</a>
-      <a href="#" target="_blank" rel="noopener">Instagram</a>
-      <a href="#" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://www.youtube.com/@Shahen-b5m" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://open.spotify.com/artist/4vZjdoka8pkUI13CEJbi6p" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://www.instagram.com/shahen.ar" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@shahen_artist" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.facebook.com/share/18HjzgShRo/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.threads.net/@shahen.ar" target="_blank" rel="noopener">Threads</a>
     </div>
+
     <div class="copyright">
       <span class="gold">قلم ولحن شاهين ✍️ | ملحن خوارزمي</span> / جميع الحقوق محفوظة / © Shahen | All Rights Reserved<br>
       Member APRA AMCOS (IPI Registered)
@@ -642,7 +646,6 @@
 </footer>
 
 <script>
-  // Typewriter effect for a chosen poetic line — establishes "poet first" identity
   const poeticLines = [
     "أنا لستُ صوتًا عابرًا، أنا قلمٌ يغنّي",
   ];
