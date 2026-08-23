@@ -276,22 +276,6 @@
   .btn-outline{color:var(--gold-bright); background:transparent;}
   .btn-outline:hover{background:rgba(200,155,60,0.1);}
 
-  .mawwal-line{
-    width:0;
-    height:1px;
-    background:var(--gold);
-    margin:60px auto;
-    animation:breathe 4s ease-in-out infinite;
-    box-shadow:0 0 8px rgba(200,155,60,0.6);
-  }
-  @keyframes breathe{
-    0%,100%{width:60px; opacity:0.5;}
-    50%{width:160px; opacity:1;}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .mawwal-line{animation:none; width:120px;}
-  }
-
   section{
     position:relative;
     z-index:1;
@@ -346,7 +330,7 @@
   /* ===== Styles / Songs grid ===== */
   .styles-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
     gap:22px;
     margin-top:40px;
   }
@@ -354,10 +338,16 @@
     background:var(--bg-card);
     border:1px solid var(--line);
     padding:28px 24px;
-    transition:border-color .3s, transform .3s;
+    transition:border-color .3s, transform .3s, box-shadow .3s;
     position:relative;
+    text-decoration:none;
+    display:block;
   }
-  .style-card:hover{border-color:var(--gold); transform:translateY(-4px);}
+  .style-card:hover{
+    border-color:var(--gold);
+    transform:translateY(-4px);
+    box-shadow:0 6px 20px rgba(200,155,60,0.15);
+  }
   .style-card .style-name{
     font-family:'Aref Ruqaa',serif;
     color:var(--gold-bright);
@@ -371,6 +361,18 @@
     margin-bottom:14px;
   }
   .style-card p{color:var(--ivory-dim); font-size:0.92rem;}
+  .play-hint {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 0.88rem;
+    color: var(--gold-bright);
+    font-weight: 500;
+    transition: transform 0.25s ease;
+  }
+  .style-card:hover .play-hint {
+    transform: translateX(-5px);
+    color: #fff;
+  }
 
   /* ===== Poetry ===== */
   .diwan-list{
@@ -476,7 +478,7 @@
 <body>
 
 <div class="note-frame top"><div class="note-track">♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 </div></div>
-<div class="note-frame bottom"><div class="note-track">♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 </div></div>
+<div class="note-frame bottom"><div class="note-track">♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 ♪ ♫ 𝄞 ♪ ♫ 𝄢 </div></div>
 
 <a href="#top" class="corner-badge" aria-label="شاهين - الرئيسية">
   <img src="watermark_circular.png" alt="شعار قلم ولحن شاهين">
@@ -565,44 +567,56 @@
   <h2 class="section-title">الأغاني — الهويات اللحنية</h2>
   <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
 
-  <p class="section-lead">ست هويات لحنية أسستها كبصمة صوتية مميزة لأعمالي.</p>
+  <p class="section-lead">ست هويات لحنية أسستها كبصمة صوتية مميزة لأعمالي (اضغط على أي نمط للاستماع للعمل على YouTube):</p>
   <div class="styles-grid">
 
-    <div class="style-card">
+    <!-- 1. SHAHEN Wave -->
+    <a href="https://youtu.be/2PKIWQx2564?si=_m-aXAtcldHfMBhE" target="_blank" rel="noopener" class="style-card">
       <div class="style-name">SHAHEN Wave</div>
       <span class="style-latin latin">The Original Signature</span>
       <p>الهوية الأصلية — طربي شرقي أصيل بروح معاصرة.</p>
-    </div>
+      <span class="play-hint">▶ استمع للنمط على YouTube</span>
+    </a>
 
-    <div class="style-card">
+    <!-- 2. SHAHEN Atlas Wave -->
+    <a href="https://youtu.be/q-KolXe6CzQ?si=9GH4CT_wBhK7ORjZ" target="_blank" rel="noopener" class="style-card">
       <div class="style-name">SHAHEN Atlas Wave</div>
       <span class="style-latin latin">Moroccan Spirit</span>
       <p>امتداد مغربي نابض بالحيوية والإيقاع.</p>
-    </div>
+      <span class="play-hint">▶ استمع للنمط على YouTube</span>
+    </a>
 
-    <div class="style-card">
+    <!-- 3. SHAHEN Ember Wave -->
+    <a href="https://youtu.be/mk1_-cqhAyo?si=Wc1hpSHcRXfEJAz_" target="_blank" rel="noopener" class="style-card">
       <div class="style-name">SHAHEN Ember Wave</div>
       <span class="style-latin latin">Levantine Intimate</span>
       <p>دفء شامي حميمي، للحن والحزن العميق.</p>
-    </div>
+      <span class="play-hint">▶ استمع للنمط على YouTube</span>
+    </a>
 
-    <div class="style-card">
+    <!-- 4. SHAHEN Furat Wave -->
+    <a href="https://youtu.be/YRXM76NQ5uc?si=qmbXNNWB0PQGbtll" target="_blank" rel="noopener" class="style-card">
       <div class="style-name">SHAHEN Furat Wave</div>
       <span class="style-latin latin">Iraqi Shaabi Chant</span>
       <p>الصوت هو البطل — شجن عراقي أصيل بلا منافس.</p>
-    </div>
+      <span class="play-hint">▶ استمع للنمط على YouTube</span>
+    </a>
 
-    <div class="style-card">
+    <!-- 5. SHAHEN Lazma Wave -->
+    <a href="https://youtu.be/jtOFSA55ZT8?si=MMAxDeZs0BZiXUHz" target="_blank" rel="noopener" class="style-card">
       <div class="style-name">SHAHEN Lazma Wave</div>
       <span class="style-latin latin">Damascene Hook Pop</span>
       <p>بوب شامي عصري، لازمة تلتصق بالذهن من أول استماع.</p>
-    </div>
+      <span class="play-hint">▶ استمع للنمط على YouTube</span>
+    </a>
 
-    <div class="style-card">
+    <!-- 6. SHAHEN Fusion Wave -->
+    <a href="https://youtu.be/rRQgOJmwdkU?si=vfc34ZM1DC9a3QW3" target="_blank" rel="noopener" class="style-card">
       <div class="style-name">SHAHEN Fusion Wave</div>
       <span class="style-latin latin">General Fusion</span>
       <p>القاعدة العامة لاندماج الشرق والعالمية، تتطوّع حسب كل عمل.</p>
-    </div>
+      <span class="play-hint">▶ استمع للنمط على YouTube</span>
+    </a>
 
   </div>
 </section>
