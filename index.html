@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>قلم ولحن شاهين | ملحن خوارزمي</title>
-<meta name="description" content="شاهين — كاتب، مؤلف، ملحن، موزع، ومنتج. قلم ولحن شاهين | ملحن خوارزمي">
+<title>قلم ولحن شاهين | SHAHEN</title>
+<meta name="description" content="شاهين — كاتب، مؤلف، ملحن، موزع، ومنتج. قلم ولحن شاهين | SHAHEN">
+
+<!-- Google Fonts: Amiri (For Royal Calligraphic Titles) & Alexandria (For Crisp Modern Body) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --bg-deep:#0b0a08;
     --bg-elevated:#15120d;
     --bg-card:#1c1712;
     --gold:#c89b3c;
-    --gold-bright:#e8c468;
-    --bronze:#6b4423;
-    --ivory:#ede6d6;
-    --ivory-dim:#a89e8c;
+    --gold-bright:#f3d382;
+    --bronze:#8a6218;
+    --ivory:#f4efe6;
+    --ivory-dim:#b8ae9c;
     --line:#3a2e20;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -25,10 +28,12 @@
   body{
     background:var(--bg-deep);
     color:var(--ivory);
-    font-family:'Tajawal',sans-serif;
+    font-family:'Alexandria', sans-serif;
     line-height:1.8;
     overflow-x:hidden;
     position:relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   body::before{
     content:"";
@@ -41,438 +46,253 @@
     z-index:0;
   }
 
-  /* ===== Musical-note ornamental frame ===== */
+  /* Sharp Calligraphy Headings */
+  h1, h2, h3, .font-title {
+    font-family: 'Amiri', serif;
+    font-weight: 700;
+    letter-spacing: 0px;
+  }
+  
+  /* Metallic Sharp Gold Gradient Text */
+  .gold-text-sharp {
+    background: linear-gradient(135deg, #fff2cb 0%, #e8c468 45%, #c89b3c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+
+  .latin{font-family:'Cormorant Garamond',serif; font-style:italic; letter-spacing:0.05em;}
+
+  /* ===== Musical-note frame ===== */
   .note-frame{
-    position:fixed;
-    left:0; right:0;
-    height:26px;
-    z-index:998;
-    display:flex;
-    align-items:center;
-    overflow:hidden;
+    position:fixed; left:0; right:0; height:26px; z-index:998;
+    display:flex; align-items:center; overflow:hidden;
     background:linear-gradient(180deg, var(--bg-deep) 0%, rgba(11,10,8,0.85) 100%);
-    border-color:var(--line);
-    pointer-events:none;
+    border-color:var(--line); pointer-events:none;
   }
   .note-frame.top{top:0; border-bottom:1px solid var(--line);}
   .note-frame.bottom{bottom:0; border-top:1px solid var(--line); background:linear-gradient(0deg, var(--bg-deep) 0%, rgba(11,10,8,0.85) 100%);}
   .note-frame .note-track{
-    display:flex;
-    white-space:nowrap;
-    color:var(--gold);
-    font-size:1rem;
-    letter-spacing:22px;
-    opacity:0.55;
-    animation:noteScroll 40s linear infinite;
+    display:flex; white-space:nowrap; color:var(--gold); font-size:1rem;
+    letter-spacing:22px; opacity:0.55; animation:noteScroll 40s linear infinite;
   }
   .note-frame.bottom .note-track{animation-direction:reverse;}
-  @keyframes noteScroll{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .note-frame .note-track{animation:none;}
-  }
+  @keyframes noteScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
   body{padding-top:26px; padding-bottom:26px;}
 
   /* ===== Title ornament ===== */
   .title-ornament{
-    display:flex;
-    align-items:center;
-    justify-content:flex-end;
-    gap:14px;
-    margin:10px 0 26px;
+    display:flex; align-items:center; justify-content:flex-end; gap:14px; margin:10px 0 26px;
   }
   .title-ornament .line{
-    flex:1;
-    max-width:120px;
-    height:1px;
-    background:linear-gradient(90deg, transparent, var(--gold) 100%);
+    flex:1; max-width:120px; height:1px; background:linear-gradient(90deg, transparent, var(--gold) 100%);
   }
-  .title-ornament .mark{
-    color:var(--gold-bright);
-    font-size:1.1rem;
-    line-height:1;
-  }
+  .title-ornament .mark{color:var(--gold-bright); font-size:1.1rem; line-height:1;}
 
-  /* ===== Hamburger + Drawer menu ===== */
-  .menu-btn{
-    position:fixed;
-    top:14px;
-    left:14px;
-    z-index:1001;
-    width:46px;
-    height:46px;
-    border:1px solid var(--gold);
-    background:rgba(11,10,8,0.75);
-    backdrop-filter:blur(6px);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:5px;
-    cursor:pointer;
-    border-radius:4px;
-  }
-  .menu-btn span{width:20px; height:2px; background:var(--gold-bright); display:block;}
-  .drawer-overlay{
-    position:fixed; inset:0; background:rgba(0,0,0,0.6);
-    z-index:1002; opacity:0; pointer-events:none; transition:opacity .3s;
-  }
-  .drawer-overlay.open{opacity:1; pointer-events:auto;}
-  .drawer{
-    position:fixed;
-    top:0; left:0;
-    height:100%;
-    width:280px;
-    max-width:80vw;
-    background:var(--bg-elevated);
-    border-right:1px solid var(--line);
-    z-index:1003;
-    transform:translateX(-100%);
-    transition:transform .35s ease;
-    padding:90px 28px 28px;
-    overflow-y:auto;
-  }
-  .drawer.open{transform:translateX(0);}
-  .drawer-close{
-    position:absolute; top:16px; left:16px;
-    width:38px; height:38px;
-    border:1px solid var(--line);
-    background:transparent; color:var(--gold-bright);
-    font-size:1.2rem; cursor:pointer; border-radius:4px;
-  }
-  .drawer h4{
-    color:var(--gold);
-    font-size:0.78rem;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
-    margin:22px 0 10px;
-  }
-  .drawer h4:first-child{margin-top:0;}
-  .drawer ul{list-style:none;}
-  .drawer li a{
-    display:block;
-    padding:10px 0;
-    color:var(--ivory);
-    text-decoration:none;
-    font-size:1.05rem;
-    border-bottom:1px solid var(--line);
-    transition:color .25s, padding-right .25s;
-  }
-  .drawer li a:hover{color:var(--gold-bright); padding-right:8px;}
-  h1,h2,h3,.font-display{font-family:'Aref Ruqaa',serif;}
-  .latin{font-family:'Cormorant Garamond',serif; font-style:italic; letter-spacing:0.05em;}
-
-  /* ===== Fixed corner badge ===== */
-  .corner-badge{
-    position:fixed;
-    top:14px;
-    right:14px;
-    width:56px;
-    height:56px;
-    border-radius:50%;
-    overflow:hidden;
-    z-index:1000;
-    opacity:0.88;
-    box-shadow:0 0 0 1px rgba(200,155,60,0.4), 0 4px 14px rgba(0,0,0,0.5);
-    transition:opacity .3s ease, transform .3s ease;
-  }
-  .corner-badge:hover{opacity:1; transform:scale(1.06);}
-  .corner-badge img{width:100%;height:100%;object-fit:cover;}
-
-  /* ===== Header nav ===== */
+  /* ===== Navigation & Header ===== */
   header{
-    position:sticky;
-    top:0;
-    z-index:900;
-    background:rgba(11,10,8,0.9);
-    backdrop-filter:blur(8px);
+    position:sticky; top:0; z-index:900;
+    background:rgba(11,10,8,0.92); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
   nav{
-    max-width:1200px;
-    margin:0 auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:14px 80px 14px 24px;
+    max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between;
+    padding:12px 80px 12px 24px;
   }
   .brand-mini{
-    font-family:'Aref Ruqaa',serif;
-    font-size:1.3rem;
-    color:var(--gold-bright);
+    font-family:'Amiri',serif; font-size:1.5rem; font-weight:700; color:var(--gold-bright);
   }
   .nav-links{display:flex; gap:28px; list-style:none;}
   .nav-links a{
-    color:var(--ivory-dim);
-    text-decoration:none;
-    font-size:0.95rem;
-    transition:color .25s;
-    position:relative;
+    color:var(--ivory-dim); text-decoration:none; font-size:0.92rem; font-weight:500; transition:color .25s;
   }
   .nav-links a:hover{color:var(--gold-bright);}
-  @media (max-width:768px){
-    .nav-links{display:none;}
+  @media (max-width:850px){.nav-links{display:none;}}
+
+  /* Custom Google Translate Styling */
+  .lang-switcher-wrap {
+    display: flex; align-items: center; gap: 8px; background: var(--bg-card);
+    padding: 4px 10px; border: 1px solid var(--line); border-radius: 4px;
   }
+  .lang-icon { font-size: 0.9rem; color: var(--gold-bright); }
+  #google_translate_element select {
+    background: transparent; color: var(--ivory); border: none; font-family: 'Alexandria', sans-serif;
+    font-size: 0.82rem; cursor: pointer; outline: none;
+  }
+  .goog-te-gadget { font-size: 0px !important; }
+  .goog-te-gadget span { display: none !important; }
+
+  /* ===== Hamburger + Drawer ===== */
+  .menu-btn{
+    position:fixed; top:14px; left:14px; z-index:1001; width:46px; height:46px;
+    border:1px solid var(--gold); background:rgba(11,10,8,0.85); backdrop-filter:blur(6px);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; border-radius:4px;
+  }
+  .menu-btn span{width:20px; height:2px; background:var(--gold-bright); display:block;}
+  .drawer-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:1002; opacity:0; pointer-events:none; transition:opacity .3s;
+  }
+  .drawer-overlay.open{opacity:1; pointer-events:auto;}
+  .drawer{
+    position:fixed; top:0; left:0; height:100%; width:290px; max-width:80vw;
+    background:var(--bg-elevated); border-right:1px solid var(--line); z-index:1003;
+    transform:translateX(-100%); transition:transform .35s ease; padding:90px 28px 28px; overflow-y:auto;
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-close{
+    position:absolute; top:16px; left:16px; width:38px; height:38px;
+    border:1px solid var(--line); background:transparent; color:var(--gold-bright); font-size:1.2rem; cursor:pointer; border-radius:4px;
+  }
+  .drawer h4{color:var(--gold); font-size:0.78rem; letter-spacing:0.2em; text-transform:uppercase; margin:22px 0 10px;}
+  .drawer h4:first-child{margin-top:0;}
+  .drawer ul{list-style:none;}
+  .drawer li a{
+    display:block; padding:10px 0; color:var(--ivory); text-decoration:none; font-size:0.98rem;
+    border-bottom:1px solid var(--line); transition:color .25s, padding-right .25s;
+  }
+  .drawer li a:hover{color:var(--gold-bright); padding-right:8px;}
+
+  /* ===== Corner Badge ===== */
+  .corner-badge{
+    position:fixed; top:14px; right:14px; width:56px; height:56px; border-radius:50%; overflow:hidden;
+    z-index:1000; opacity:0.9; box-shadow:0 0 0 1px rgba(200,155,60,0.5), 0 4px 14px rgba(0,0,0,0.6);
+    transition:transform .3s ease;
+  }
+  .corner-badge:hover{transform:scale(1.08);}
+  .corner-badge img{width:100%;height:100%;object-fit:cover;}
 
   /* ===== Hero ===== */
   .hero{
-    position:relative;
-    min-height:92vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
-      linear-gradient(180deg, rgba(11,10,8,0.55) 0%, rgba(11,10,8,0.85) 100%),
-      url('banner_5120x2880.png') center 30%/cover no-repeat;
-    text-align:center;
-    padding:40px 20px;
-    z-index:1;
+    position:relative; min-height:90vh; display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(180deg, rgba(11,10,8,0.5) 0%, rgba(11,10,8,0.88) 100%), url('banner_5120x2880.png') center 30%/cover no-repeat;
+    text-align:center; padding:50px 20px; z-index:1;
   }
-  .hero-inner{max-width:780px;}
+  .hero-inner{max-width:820px;}
   .hero h1{
-    font-size:clamp(2.4rem, 6vw, 4.2rem);
-    color:var(--gold-bright);
-    text-shadow:0 2px 24px rgba(0,0,0,0.7);
-    margin-bottom:10px;
+    font-size:clamp(2.8rem, 6.5vw, 4.8rem); line-height:1.2; margin-bottom:12px;
   }
   .hero .tagline{
-    font-size:clamp(1rem, 2.2vw, 1.3rem);
-    color:var(--ivory);
-    letter-spacing:0.15em;
-    margin-bottom:6px;
+    font-size:clamp(1rem, 2.2vw, 1.25rem); color:var(--ivory); letter-spacing:0.12em; margin-bottom:8px;
   }
   .hero .roles{
-    color:var(--ivory-dim);
-    font-size:0.95rem;
-    letter-spacing:0.08em;
-    margin-bottom:34px;
+    color:var(--ivory-dim); font-size:0.95rem; font-weight:400; letter-spacing:0.06em; margin-bottom:34px;
   }
-  .hero .roles span{margin:0 6px;}
+  .hero .roles span{margin:0 8px;}
   .hero .poetic-line{
-    font-family:'Aref Ruqaa',serif;
-    color:var(--gold-bright);
-    font-size:clamp(1rem, 2.6vw, 1.4rem);
-    margin:18px auto 30px;
-    min-height:1.6em;
-    border-left:2px solid var(--gold);
-    padding-left:12px;
-    display:inline-block;
+    font-family:'Amiri',serif; color:var(--gold-bright); font-size:clamp(1.2rem, 3vw, 1.6rem);
+    margin:18px auto 34px; min-height:1.6em; border-left:2px solid var(--gold); padding-left:14px; display:inline-block;
   }
   .cta-row{display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
   .btn{
-    display:inline-block;
-    padding:13px 34px;
-    border-radius:2px;
-    font-size:0.95rem;
-    text-decoration:none;
-    letter-spacing:0.03em;
-    transition:all .3s ease;
-    border:1px solid var(--gold);
+    display:inline-block; padding:13px 34px; border-radius:2px; font-size:0.92rem; font-weight:600;
+    text-decoration:none; transition:all .3s ease; border:1px solid var(--gold);
   }
-  .btn-primary{background:var(--gold); color:#0b0a08; font-weight:700;}
+  .btn-primary{background:var(--gold); color:#0b0a08;}
   .btn-primary:hover{background:var(--gold-bright); box-shadow:0 0 24px rgba(200,155,60,0.4);}
   .btn-outline{color:var(--gold-bright); background:transparent;}
-  .btn-outline:hover{background:rgba(200,155,60,0.1);}
+  .btn-outline:hover{background:rgba(200,155,60,0.12);}
 
   section{
-    position:relative;
-    z-index:1;
-    max-width:1100px;
-    margin:0 auto;
-    padding:90px 24px;
+    position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:90px 24px;
   }
   .section-eyebrow{
-    color:var(--gold);
-    letter-spacing:0.25em;
-    font-size:0.8rem;
-    text-transform:uppercase;
+    color:var(--gold); letter-spacing:0.22em; font-size:0.78rem; font-weight:600; text-transform:uppercase;
   }
   .section-title{
-    font-size:clamp(2rem, 4.4vw, 2.9rem);
-    color:var(--ivory);
-    margin:8px 0 4px;
-    text-shadow:0 0 30px rgba(200,155,60,0.15);
-    letter-spacing:0.01em;
+    font-size:clamp(2.2rem, 4.8vw, 3.2rem); margin:8px 0 4px; line-height:1.25;
   }
   .section-lead{
-    color:var(--ivory-dim);
-    max-width:680px;
-    font-size:1.05rem;
+    color:var(--ivory-dim); max-width:700px; font-size:1rem; font-weight:300;
   }
 
   /* ===== About ===== */
   .about-grid{
-    display:grid;
-    grid-template-columns:1.2fr 0.8fr;
-    gap:50px;
-    align-items:start;
-    margin-top:40px;
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:50px; align-items:start; margin-top:40px;
   }
-  .about-badge-wrap{
-    display:flex;
-    justify-content:center;
-  }
-  .about-badge-wrap img{
-    width:100%;
-    max-width:320px;
-    border-radius:50%;
-  }
+  .about-badge-wrap{display:flex; justify-content:center;}
+  .about-badge-wrap img{width:100%; max-width:320px; border-radius:50%; border: 1px solid var(--line);}
   @media (max-width:768px){
     .about-grid{grid-template-columns:1fr; gap:32px;}
     .about-badge-wrap{order:-1;}
     .about-badge-wrap img{max-width:220px;}
   }
-  .about-text p{margin-bottom:16px; color:var(--ivory-dim);}
-  .about-text strong{color:var(--gold-bright); font-weight:500;}
+  .about-text p{margin-bottom:18px; color:var(--ivory-dim); font-size:0.98rem;}
+  .about-text strong{color:var(--gold-bright); font-weight:600;}
 
   /* ===== Styles / Songs grid ===== */
   .styles-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-    gap:22px;
-    margin-top:40px;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:22px; margin-top:40px;
   }
   .style-card{
-    background:var(--bg-card);
-    border:1px solid var(--line);
-    padding:28px 24px;
-    transition:border-color .3s, transform .3s, box-shadow .3s;
-    position:relative;
-    text-decoration:none;
-    display:block;
+    background:var(--bg-card); border:1px solid var(--line); padding:28px 24px;
+    transition:all .3s ease; position:relative; text-decoration:none; display:block;
   }
   .style-card:hover{
-    border-color:var(--gold);
-    transform:translateY(-4px);
-    box-shadow:0 6px 20px rgba(200,155,60,0.15);
+    border-color:var(--gold); transform:translateY(-4px); box-shadow:0 8px 24px rgba(200,155,60,0.15);
   }
   .style-card .style-name{
-    font-family:'Aref Ruqaa',serif;
-    color:var(--gold-bright);
-    font-size:1.3rem;
-    margin-bottom:8px;
+    font-family:'Amiri',serif; color:var(--gold-bright); font-size:1.45rem; font-weight:700; margin-bottom:6px;
   }
   .style-card .style-latin{
-    display:block;
-    color:var(--gold);
-    font-size:0.85rem;
-    margin-bottom:14px;
+    display:block; color:var(--gold); font-size:0.85rem; margin-bottom:14px;
   }
-  .style-card p{color:var(--ivory-dim); font-size:0.92rem;}
+  .style-card p{color:var(--ivory-dim); font-size:0.92rem; font-weight:300;}
   .play-hint {
-    display: inline-block;
-    margin-top: 18px;
-    font-size: 0.88rem;
-    color: var(--gold-bright);
-    font-weight: 500;
-    transition: transform 0.25s ease;
+    display: inline-block; margin-top: 18px; font-size: 0.85rem; color: var(--gold-bright);
+    font-weight: 500; transition: transform 0.25s ease;
   }
-  .style-card:hover .play-hint {
-    transform: translateX(-5px);
-    color: #fff;
-  }
+  .style-card:hover .play-hint { transform: translateX(-6px); color: #fff; }
 
   /* ===== Poetry ===== */
   .diwan-list{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-    gap:16px;
-    margin-top:40px;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px; margin-top:40px;
   }
   .diwan-item{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    padding:20px;
-    border-bottom:1px solid var(--line);
-    transition:background .3s;
-    text-decoration:none;
+    display:flex; align-items:center; gap:18px; padding:20px; border-bottom:1px solid var(--line);
+    transition:background .3s; text-decoration:none;
   }
   .diwan-item:hover{background:rgba(200,155,60,0.08);}
   .diwan-num{
-    font-family:'Cormorant Garamond',serif;
-    font-style:normal;
-    font-size:1.6rem;
-    color:var(--bronze);
-    min-width:36px;
+    font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--bronze); min-width:36px;
   }
-  .diwan-item h3{font-size:1.15rem; color:var(--ivory); margin-bottom:4px;}
-  .diwan-item span{color:var(--ivory-dim); font-size:0.88rem;}
+  .diwan-item h3{font-family:'Amiri',serif; font-size:1.25rem; color:var(--ivory); margin-bottom:2px;}
+  .diwan-item span{color:var(--ivory-dim); font-size:0.85rem; font-weight:300;}
 
   /* ===== Archive ===== */
   .archive-note{
-    text-align:center;
-    padding:60px 24px;
-    color:var(--ivory-dim);
-    border:1px dashed var(--line);
+    text-align:center; padding:60px 24px; color:var(--ivory-dim); border:1px dashed var(--line); font-weight:300;
   }
 
   /* ===== Footer ===== */
   footer{
-    background:var(--bg-elevated);
-    border-top:1px solid var(--line);
-    padding:70px 24px 40px;
-    position:relative;
-    z-index:1;
+    background:var(--bg-elevated); border-top:1px solid var(--line); padding:70px 24px 40px;
+    position:relative; z-index:1;
   }
-  .footer-inner{
-    max-width:1000px;
-    margin:0 auto;
-    text-align:center;
-  }
+  .footer-inner{max-width:1000px; margin:0 auto; text-align:center;}
   .footer-badge{
-    width:110px;
-    height:110px;
-    border-radius:50%;
-    margin:0 auto 24px;
+    width:110px; height:110px; border-radius:50%; margin:0 auto 24px;
     box-shadow:0 0 0 2px var(--gold), 0 0 30px rgba(200,155,60,0.25);
   }
   .footer-badge img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
   .platform-links{
-    display:flex;
-    justify-content:center;
-    gap:16px;
-    flex-wrap:wrap;
-    margin:28px 0;
+    display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin:28px 0;
   }
   .platform-links a{
-    color:var(--ivory-dim);
-    text-decoration:none;
-    font-size:0.95rem;
-    padding:8px 18px;
-    border:1px solid var(--line);
-    transition:all .3s;
+    color:var(--ivory-dim); text-decoration:none; font-size:0.9rem; padding:8px 18px;
+    border:1px solid var(--line); transition:all .3s;
   }
   .platform-links a:hover{color:var(--gold-bright); border-color:var(--gold);}
   
-  .contact-email-box{
-    margin: 24px 0;
-    font-size: 1.05rem;
-    color: var(--ivory-dim);
-  }
+  .contact-email-box{ margin: 24px 0; font-size: 1rem; color: var(--ivory-dim); }
   .contact-email-box a{
-    color: var(--gold-bright);
-    text-decoration: none;
-    font-weight: 500;
-    border-bottom: 1px dashed var(--gold);
-    transition: color .3s;
+    color: var(--gold-bright); text-decoration: none; font-weight: 500; border-bottom: 1px dashed var(--gold); transition: color .3s;
   }
-  .contact-email-box a:hover{
-    color: #fff;
-  }
+  .contact-email-box a:hover{ color: #fff; }
 
   .copyright{
-    color:var(--ivory-dim);
-    font-size:0.82rem;
-    line-height:2;
-    margin-top:30px;
-    max-width:600px;
-    margin-left:auto;
-    margin-right:auto;
+    color:var(--ivory-dim); font-size:0.82rem; line-height:2; margin-top:30px; max-width:600px; margin-left:auto; margin-right:auto; font-weight:300;
   }
-  .copyright .gold{color:var(--gold);}
+  .copyright .gold{color:var(--gold); font-weight:500;}
 </style>
 </head>
 <body>
@@ -497,7 +317,7 @@
     <li><a href="#top">الرئيسية</a></li>
     <li><a href="#about">من أنا</a></li>
     <li><a href="#songs">الأغاني</a></li>
-    <li><a href="dawaweenShahen.html" style="color:var(--gold-bright); font-weight:bold;">📖 صفحة الدواوين الشعرية</a></li>
+    <li><a href="dawaweenShahen.html" style="color:var(--gold-bright); font-weight:600;">📖 الدواوين الشعرية</a></li>
     <li><a href="#archive">الأرشيف</a></li>
   </ul>
 
@@ -520,7 +340,7 @@
 
 <header>
   <nav>
-    <div class="brand-mini">شاهين <span class="latin" style="font-size:0.8rem; color:var(--gold);">SHAHEN</span></div>
+    <div class="brand-mini">شاهين <span class="latin" style="font-size:0.85rem; color:var(--gold);">SHAHEN</span></div>
     <ul class="nav-links">
       <li><a href="#about">من أنا</a></li>
       <li><a href="#songs">الأغاني</a></li>
@@ -528,12 +348,18 @@
       <li><a href="#archive">الأرشيف</a></li>
       <li><a href="#contact">تواصل</a></li>
     </ul>
+
+    <!-- Multilingual Switcher -->
+    <div class="lang-switcher-wrap">
+      <span class="lang-icon">🌐</span>
+      <div id="google_translate_element"></div>
+    </div>
   </nav>
 </header>
 
 <div id="top" class="hero">
   <div class="hero-inner">
-    <h1>قلم ولحن شاهين</h1>
+    <h1 class="gold-text-sharp">قلم ولحن شاهين</h1>
     <div class="tagline latin">SHAHEN — The Algorithmic Composer</div>
     <div class="roles">
       <span>كاتب</span>•<span>مؤلف</span>•<span>ملحن</span>•<span>موزع</span>•<span>منتج</span>
@@ -548,7 +374,7 @@
 
 <section id="about">
   <div class="section-eyebrow">Biography</div>
-  <h2 class="section-title">من أنا</h2>
+  <h2 class="section-title gold-text-sharp">من أنا</h2>
   <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
   <div class="about-grid">
     <div class="about-text">
@@ -564,7 +390,7 @@
 
 <section id="songs">
   <div class="section-eyebrow">Musical Identities</div>
-  <h2 class="section-title">الأغاني — الهويات اللحنية</h2>
+  <h2 class="section-title gold-text-sharp">الأغاني — الهويات اللحنية</h2>
   <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
 
   <p class="section-lead">ست هويات لحنية أسستها كبصمة صوتية مميزة لأعمالي (اضغط على أي نمط للاستماع للعمل على YouTube):</p>
@@ -623,7 +449,7 @@
 
 <section id="poetry">
   <div class="section-eyebrow">Poetry Collections</div>
-  <h2 class="section-title">الدواوين الشعرية</h2>
+  <h2 class="section-title gold-text-sharp">الدواوين الشعرية</h2>
   <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
 
   <p class="section-lead">اضغط على أي ديوان للانتقال المباشر لصفحة القصائد والقراءة الكاملة:</p>
@@ -644,7 +470,7 @@
 
 <section id="archive">
   <div class="section-eyebrow">Chronicle</div>
-  <h2 class="section-title">الأرشيف</h2>
+  <h2 class="section-title gold-text-sharp">الأرشيف</h2>
   <div class="title-ornament"><div class="line"></div><span class="mark">𝄞</span></div>
 
   <div class="archive-note">
@@ -657,7 +483,7 @@
     <div class="footer-badge">
       <img src="watermark_circular.png" alt="شاهين">
     </div>
-    <h2 class="section-title" style="font-size:1.6rem;">تابعوني على كل منصاتي الرسمية</h2>
+    <h2 class="section-title gold-text-sharp" style="font-size:1.8rem;">تابعوني على كل منصاتي الرسمية</h2>
     
     <div class="platform-links">
       <a href="https://linktr.ee/shahen.art.2026" target="_blank" rel="noopener">🔗 كل الروابط</a>
@@ -679,6 +505,18 @@
     </div>
   </div>
 </footer>
+
+<!-- Google Translate Integration Script -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'ar',
+    includedLanguages: 'en,es,fr,tr',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
   const poeticLines = [
